@@ -9,6 +9,8 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, get_raw_jwt
 from flask_mail import Mail, Message
 from os import access, environ
+from dotenv import load_dotenv
+load_dotenv()
 import config
 
 
@@ -116,7 +118,7 @@ def register():
         password = request.json.get("password", None)
         email = request.json.get("email", None)
         role = request.json.get("role", None)
-
+        adminpassword = request.json.get("admin_password", None)
         if not username:
             return jsonify({"msg": "Se requiere nombre de usuario"}), 400
         if not password:
@@ -132,6 +134,21 @@ def register():
         user_email = Account.query.filter_by(email=email).first()
         if user_email:
             return jsonify({"msg": "Correo electronico ya existe"}), 400
+
+        if role == "1":
+            if not adminpassword:
+                return jsonify({"msg": "Falta contraseña de admin"}), 401
+            if adminpassword == environ.get("ADMIN_PASS"):
+                account = Account()
+                account.username = username
+                account.email = email
+                account.password = generate_password_hash(password)
+                account.role_id = role
+                account.save()
+                return jsonify(account.serialize()), 201
+            else:
+                return jsonify({"msg": "Contraseña de admin incorrecta"}), 401
+
 
         account = Account()
         account.username = username

@@ -6,7 +6,7 @@ class Base:
     DEBUG = True
     ENV = 'development'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://{}:{}@{}:{}/{}'.format(
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{}:{}@{}:{}/{}'.format(
         environ.get('DBUSER'), 
         environ.get('DBPASS'), 
         environ.get('DBHOST'), 
@@ -18,7 +18,6 @@ class Base:
     SECRET_KEY = ''
     MAIL_SERVER  = environ.get('MAIL_SERVER')
     MAIL_PORT = environ.get('MAIL_PORT')
-    # MAIL_USE_SSL  = bool(environ.get('MAIL_USE_SSL'))
     MAIL_USE_TLS = bool(environ.get('MAIL_USE_TLS'))
     MAIL_DEBUG  = bool(environ.get('MAIL_DEBUG'))
     MAIL_USERNAME = environ.get('MAIL_USERNAME')
