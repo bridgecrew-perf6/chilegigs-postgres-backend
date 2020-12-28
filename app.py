@@ -48,7 +48,7 @@ def send_password():
             expires = datetime.timedelta(hours=3)
             access_token = create_access_token(identity=account.username, expires_delta=expires)
             msg = Message("Recuperar contraseña", recipients=[email])
-            msg.html = f"<h1>Hola {account.username}</h1><br><h3>Petición para cambiar contraseña aceptada</h3><br><h4>Pincha <a href='http://localhost:3000/recover/{access_token}'> aquí</a> para generar tu nueva contraseña</h4>"
+            msg.html = f"<h1>Hola {account.username}</h1><br><h3>Petición para cambiar contraseña aceptada</h3><br><h4>Pincha <a href='https://chilegigs.netlify.app/recover/{access_token}'> aquí</a> para generar tu nueva contraseña</h4>"
             mail.send(msg)
             return jsonify({"exito": "Email enviado"}), 200
             # data = {
@@ -737,7 +737,7 @@ def gigRegister():
 def send_aviso_booking(nombre_evento, username_cliente,username_dj,dj_id):
     account = Account.query.filter_by(id=dj_id).first()
     msg = Message(f"{username_cliente} quiere que toques en su evento!", recipients=[account.email])
-    msg.html = f"<h1>Hola {username_dj} !</h1><br><h3>El cliente {username_cliente} te quiere contratar para el evento {nombre_evento}, visita <a href='http://localhost:3000/'>chilegigs</a> para ver más detalles.</h3>"
+    msg.html = f"<h1>Hola {username_dj} !</h1><br><h3>El cliente {username_cliente} te quiere contratar para el evento {nombre_evento}, visita <a href='https://chilegigs.netlify.app/'>chilegigs</a> para ver más detalles.</h3>"
     mail.send(msg)
     return jsonify({"exito": "Email enviado"}), 200
 
@@ -803,7 +803,7 @@ def gigUpdate(id):
 def send_aviso_cambios(nombre_evento, username):
     account = Account.query.filter_by(username=username).first()
     msg = Message(f"Tienes un nuevo mensaje en el evento {nombre_evento} !", recipients=[account.email])
-    msg.html = f"<h1>Hola {username} !</h1><br><h3>Te han dejado un nuevo mensaje en el booking del evento {nombre_evento}, visita <a href='http://localhost:3000/'>chilegigs</a> para ver más detalles.</h3>"
+    msg.html = f"<h1>Hola {username} !</h1><br><h3>Te han dejado un nuevo mensaje en el booking del evento {nombre_evento}, visita <a href='https://chilegigs.netlify.app/'>chilegigs</a> para ver más detalles.</h3>"
     mail.send(msg)
     return jsonify({"exito": "Email enviado"}), 200
 
