@@ -3,8 +3,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Base:
-    DEBUG = True
-    ENV = 'development'
+    DEBUG = False
+    ENV = 'production'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL')
     JWT_SECRET_KEY = environ.get('JWT_SECRET_KEY')
