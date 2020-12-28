@@ -10,11 +10,12 @@ class Base:
     JWT_SECRET_KEY = environ.get('JWT_SECRET_KEY')
     JWT_BLACKLIST_TOKEN_CHECKS = ['access']
     SECRET_KEY = ''
+    MAIL_USE_TLS = True
     MAIL_SERVER  = environ.get('MAIL_SERVER')
     MAIL_PORT = 587
     # MAIL_USE_TLS = bool(environ.get('MAIL_USE_TLS'))
     # MAIL_DEBUG  = bool(environ.get('MAIL_DEBUG'))
-    MAIL_USE_TLS = True
+ 
     MAIL_DEBUG  = True
     TESTING = False
     MAIL_SUPPRESS_SEND = False
